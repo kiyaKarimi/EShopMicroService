@@ -12,7 +12,7 @@ namespace Catalog.API.Products.CreatProduct
             app.MapPost("/products",
                 async (CeateProductRequest request, ISender sender) =>
                 {
-                    var command = request.Adapt<CeateProductCommand>();
+                    var command = request.Adapt<CreateProductCommand>();
                     var result = await sender.Send(command);
                     var response = result.Adapt<CreateProductResponse>();
 
@@ -23,8 +23,8 @@ namespace Catalog.API.Products.CreatProduct
                 WithSummary("Create Product").
                 WithDescription("Create Product")
                 ;
-                
-                
+
+
         }
     }
 }
