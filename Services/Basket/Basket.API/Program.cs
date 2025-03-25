@@ -21,6 +21,7 @@ namespace Basket.API
                 opts.Schema.For<ShoppingCart>().Identity(x => x.UserName);
             }
             ).UseLightweightSessions();
+            builder.Services.AddScoped<IBasketRepository, BasketRepository>();
             builder.Services.AddValidatorsFromAssembly(Assembely);
             builder.Services.AddCarter();
             var app = builder.Build();
