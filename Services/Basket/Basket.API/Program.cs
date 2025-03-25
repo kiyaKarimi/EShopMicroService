@@ -1,4 +1,6 @@
 
+using BuildingBlocks.Exceptions.Handler;
+
 namespace Basket.API
 {
     public class Program
@@ -22,10 +24,19 @@ namespace Basket.API
             }
             ).UseLightweightSessions();
             builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+            builder.Services.Decorate<IBasketRepository, BasketRepository>();
             builder.Services.AddValidatorsFromAssembly(Assembely);
+            builder.Services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = builder.Configuration.GetConnectionString("Redis");
+            });
+
             builder.Services.AddCarter();
+            builder.Services.AddExceptionHandler<CustomExceptionHandler>();
             var app = builder.Build();
+
             app.MapCarter();
+            app.UseExceptionHandler(options => { });
             app.Run();
         }
     }
