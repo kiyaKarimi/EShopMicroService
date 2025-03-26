@@ -1,5 +1,6 @@
 
 using BuildingBlocks.Exceptions.Handler;
+using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
@@ -33,6 +34,11 @@ namespace Basket.API
                 options.Configuration = builder.Configuration.GetConnectionString("Redis");
             });
 
+
+            builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+            {
+                options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+            });
             builder.Services.AddCarter();
             builder.Services.AddExceptionHandler<CustomExceptionHandler>();
             builder.Services.AddHealthChecks()
