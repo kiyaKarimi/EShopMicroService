@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Discount.Grpc.Services
 {
     public class DiscountService
-            (DiscountContext dbContext, ILogger<DiscountService> logger) 
+            (DiscountContext dbContext, ILogger<DiscountService> logger)
         : DiscountProtoService.DiscountProtoServiceBase
     {
 

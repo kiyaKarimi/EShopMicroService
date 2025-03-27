@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Ordering.API
+﻿namespace Ordering.API
 {
     public static class DependencyInjection
     {

@@ -47,7 +47,7 @@ namespace Basket.API
                 };
 
                 return handler;
-            }); 
+            });
             builder.Services.AddCarter();
             builder.Services.AddExceptionHandler<CustomExceptionHandler>();
             builder.Services.AddHealthChecks()
