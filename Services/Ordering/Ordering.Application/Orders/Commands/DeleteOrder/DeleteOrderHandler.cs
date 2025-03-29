@@ -1,5 +1,5 @@
 ﻿using Ordering.Application.Data;
-using Ordering.Application.Extensions;
+using Ordering.Application.Exceptions;
 using Ordering.Domain.ValueObjects;
 
 namespace Ordering.Application.Orders.Commands.DeleteOrder

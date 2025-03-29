@@ -1,5 +1,6 @@
 
 using BuildingBlocks.Exceptions.Handler;
+using BuildingBlocks.Messaging.MassTransit;
 using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -49,6 +50,7 @@ namespace Basket.API
                 return handler;
             });
             builder.Services.AddCarter();
+            builder.Services.AddMessageBroker(builder.Configuration);
             builder.Services.AddExceptionHandler<CustomExceptionHandler>();
             builder.Services.AddHealthChecks()
                 .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)

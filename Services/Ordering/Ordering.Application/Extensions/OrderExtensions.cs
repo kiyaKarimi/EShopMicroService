@@ -1,6 +1,6 @@
 ﻿using Ordering.Domain.Models;
 
-namespace Ordering.Application.Orders.Extensions
+namespace Ordering.Application.Extensions
 {
     public static class OrderExtensions
     {

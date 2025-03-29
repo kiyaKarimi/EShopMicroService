@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ordering.Application.Data;
-using Ordering.Application.Orders.Extensions;
+using Ordering.Application.Extensions;
 using Ordering.Domain.ValueObjects;
 
 namespace Ordering.Application.Orders.Queries.GetOrdersByCustomer
