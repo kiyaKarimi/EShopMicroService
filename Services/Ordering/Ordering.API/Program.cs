@@ -11,7 +11,7 @@ namespace Ordering.API
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddInfrastructureServices(builder.Configuration).
                 AddApplicationServices().
-                AddApiServices();
+                AddApiServices(builder.Configuration);
             var app = builder.Build();
             app.UseApiServices();
             if (app.Environment.IsDevelopment())
