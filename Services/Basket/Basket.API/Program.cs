@@ -1,9 +1,11 @@
 
 using BuildingBlocks.Exceptions.Handler;
 using BuildingBlocks.Messaging.MassTransit;
+using BuildingBlocks.Serilogs;
 using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Serilog;
 
 namespace Basket.API
 {
@@ -13,6 +15,7 @@ namespace Basket.API
         {
             var builder = WebApplication.CreateBuilder(args);
             var Assembely = typeof(Program).Assembly;
+            builder.Host.UseSerilog(SeriLogger.Configure);
             builder.Services.AddMediatR(config =>
             {
                 config.RegisterServicesFromAssemblies(Assembely);
@@ -35,7 +38,7 @@ namespace Basket.API
                 options.Configuration = builder.Configuration.GetConnectionString("Redis");
             });
 
-
+            builder.Services.AddTransient<LoggingDelegatingHandler>();
             builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
             {
                 options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
@@ -48,7 +51,7 @@ namespace Basket.API
                 };
 
                 return handler;
-            });
+            }).AddHttpMessageHandler<LoggingDelegatingHandler>(); 
             builder.Services.AddCarter();
             builder.Services.AddMessageBroker(builder.Configuration);
             builder.Services.AddExceptionHandler<CustomExceptionHandler>();
